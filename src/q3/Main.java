@@ -9,6 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		partOne();
+		partTwo();
 	}
 	
 	public static boolean isPossible(int dim1, int dim2, int dim3) {	
@@ -54,7 +55,61 @@ public class Main {
 		} catch(IOException ioe) {
 			System.out.println("Issue reading file");
 		}
-		System.out.println(numPossible);
+		System.out.println("Part 1: " + numPossible);
+	}
+	
+	public static void partTwo() {
+		int numPossible = 0;
+		int dimA1 = 0;
+		int dimA2 = 0;
+		int dimA3 = 0;
+		
+		int dimB1 = 0;
+		int dimB2 = 0;
+		int dimB3 = 0;
+		
+		int dimC1 = 0;
+		int dimC2 = 0;
+		int dimC3 = 0;
+		
+		try {
+			File inputFile = new File("Q3_input.txt");
+			FileReader fr = new FileReader(inputFile);
+			BufferedReader br = new BufferedReader(fr);
+			String line1 = null;
+			String line2 = null;
+			String line3 = null;
+			while((line1 = br.readLine()) != null) {
+				line2 = br.readLine();
+				line3 = br.readLine();
+
+				dimA1 = toInt(line1.substring(2,5));
+				dimA2 = toInt(line2.substring(2,5));
+				dimA3 = toInt(line3.substring(2,5));
+				if(isPossible(dimA1,dimA2,dimA3)) {
+					numPossible++;
+				}
+				
+				dimB1 = toInt(line1.substring(7,10));
+				dimB2 = toInt(line2.substring(7,10));
+				dimB3 = toInt(line3.substring(7,10));
+				if(isPossible(dimB1,dimB2,dimB3)) {
+					numPossible++;
+				}
+				
+				dimC1 = toInt(line1.substring(12,15));
+				dimC2 = toInt(line2.substring(12,15));
+				dimC3 = toInt(line3.substring(12,15));
+				if(isPossible(dimC1,dimC2,dimC3)) {
+					numPossible++;
+				}
+			}
+			
+			br.close();
+		} catch(IOException ioe) {
+			System.out.println("Issue reading file");
+		}
+		System.out.println("Part 2: " + numPossible);
 	}
 
 }
